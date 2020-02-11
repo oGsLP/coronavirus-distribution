@@ -1,6 +1,6 @@
 <template>
   <div class="title">
-    <h2>全国新型冠状病毒分布图</h2>
+    <h2>{{title}}</h2>
     <p>
       确诊：{{ total.confirm
       }}<code class="danger">↑{{ today.confirm }}</code> 疑似：{{ total.suspect
@@ -15,6 +15,10 @@
 export default {
   name: "Title",
   props: {
+    title:{
+      type:String,
+      default:""
+    },
     today: {
       type: Object,
       required: true
@@ -29,6 +33,9 @@ export default {
 
 <style lang="stylus" scoped>
 .title
+  width 80%
+  margin 0 10%
+  border-bottom 2px solid grey
   h2
     margin 5px
   p

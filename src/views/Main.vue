@@ -1,7 +1,12 @@
 <template>
   <div class="main">
     <div class="left-part">
-      <Title id="title" :today="nation.today" :total="nation.total" />
+      <Title
+        id="title"
+        :today="nation.today"
+        :total="nation.total"
+        :title="`全国新型冠状病毒分布图`"
+      />
       <div ref="map" id="map"></div>
     </div>
     <List class="right-part" :prov="listData" />
@@ -128,6 +133,7 @@ export default {
         // todo
       });
       this.chart.hideLoading();
+      this.listData = this.getProvince("江苏");
     },
     getProvince(name) {
       for (let prov of this.provinces)
@@ -143,18 +149,18 @@ export default {
 .main
   margin 0 1%
   width 98%
-  height auto
-  min-height 680px
-  max-height 700px
+  height 700px
   /*border 1px solid black*/
   display flex
   flex-direction row
   justify-content space-around
   .left-part,.right-part
     margin 0.5%
+    box-shadow 0 4px 4px 0 rgba(0,0,0,0.3)
+    border-radius 4px
     /*border 1px solid black*/
   .left-part
-    width 69%
+    width 67%
     display flex
     flex-direction column
     justify-content space-around
@@ -162,11 +168,11 @@ export default {
       /*border 1px solid black*/
       height 10%
     #map
-      border 1px solid navy
       height 88%
-      width 100%
+      width 96%
+      margin 0 2%
       min-height 300px
       min-width 450px
   .right-part
-    width 29%
+    width 31%
 </style>

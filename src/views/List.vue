@@ -1,37 +1,45 @@
 <template>
   <div class="list">
-    {{ prov.name }}
-    <el-table
-      class="table"
-      size="mini"
-      :data="tableData"
-      style="width: 100%;font-size: 12px"
-      :row-style="{ height: 0 }"
-      :cell-style="{ padding: 0 }"
-      :span-method="objectSpanMethod"
-      fit
-      stripe
-      border
-    >
-      <el-table-column prop="name" label="城市" align="center" width="100">
-      </el-table-column>
-      <el-table-column prop="kind" label=" " align="center" width="50">
-      </el-table-column>
-      <el-table-column prop="confirm" label="确诊" align="center" width="80">
-      </el-table-column>
-      <el-table-column prop="suspect" label="疑似" align="center" width="65">
-      </el-table-column>
-      <el-table-column prop="heal" label="治愈" align="center" width="60">
-      </el-table-column>
-      <el-table-column prop="dead" label="死亡" align="center" width="60">
-      </el-table-column>
-    </el-table>
+    <Title
+      class="list-title"
+      :today="prov.today"
+      :total="prov.total"
+      :title="prov.name + ` 疫情统计`"
+    />
+    <div class="list-table">
+      <el-table
+        class="table"
+        size="mini"
+        :data="tableData"
+        style="font-size: 12px"
+        :row-style="{ height: 0 }"
+        :cell-style="{ padding: 0 }"
+        :span-method="objectSpanMethod"
+        stripe
+        default-expand-all
+      >
+        <el-table-column prop="name" label="城市" align="center" width="110">
+        </el-table-column>
+        <el-table-column prop="kind" label=" " align="center" width="35">
+        </el-table-column>
+        <el-table-column prop="confirm" label="确诊" align="center">
+        </el-table-column>
+        <el-table-column prop="suspect" label="疑似" align="center" width="70">
+        </el-table-column>
+        <el-table-column prop="heal" label="治愈" align="center" width="70">
+        </el-table-column>
+        <el-table-column prop="dead" label="死亡" align="center" width="70">
+        </el-table-column>
+      </el-table>
+    </div>
   </div>
 </template>
 
 <script>
+import Title from "./Title";
 export default {
   name: "List",
+  components: { Title },
   props: {
     prov: {
       type: Object,
@@ -45,7 +53,7 @@ export default {
         this.prov["children"].forEach(city => {
           console.log(city);
           let td = { name: city["name"], kind: "↑" };
-          let tt = { name: city["name"], kind: "总和" };
+          let tt = { name: city["name"], kind: "总" };
           Object.assign(td, city["today"]);
           Object.assign(tt, city["total"]);
           arr.push(tt, td);
@@ -76,8 +84,30 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-.table
-  max-height 80%
-  overflow-x hidden
-  overflow-y scroll
+.list
+  display flex
+  flex-direction column
+  justify-content space-between
+  .list-title
+    height 10%
+    margin-top 2.5px
+  .list-table
+    margin 7.5px
+    height 86.5%
+    .table
+      height 100%
+      overflow-x hidden
+      overflow-y auto
+    .table::-webkit-scrollbar
+      width: 5px;
+      height: 0;
+      background-color: transparent;
+    .table::-webkit-scrollbar-track
+      -webkit-box-shadow: inset 0 0 2px rgba(0,0,0,0.3);
+      border-radius: 10px;
+      background-color: #FFF;
+    .table::-webkit-scrollbar-thumb
+      border-radius: 10px;
+      -webkit-box-shadow: inset 0 0 2px rgba(0,0,0,.3);
+      background-color: #AAA;
 </style>
