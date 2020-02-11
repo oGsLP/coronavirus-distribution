@@ -1,6 +1,6 @@
 <template>
   <div class="title">
-    <h2>{{title}}</h2>
+    <h2>{{ title }}</h2>
     <p>
       确诊：{{ total.confirm
       }}<code class="danger">↑{{ today.confirm }}</code> 疑似：{{ total.suspect
@@ -15,17 +15,23 @@
 export default {
   name: "Title",
   props: {
-    title:{
-      type:String,
-      default:""
+    title: {
+      type: String,
+      default: ""
     },
     today: {
       type: Object,
-      required: true
+      required: true,
+      default() {
+        return { confirm: 0, suspect: 0, dead: 0, heal: 0 };
+      }
     },
     total: {
       type: Object,
-      required: true
+      required: true,
+      default() {
+        return { confirm: 0, suspect: 0, dead: 0, heal: 0 };
+      }
     }
   }
 };
