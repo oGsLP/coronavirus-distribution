@@ -1,5 +1,5 @@
 <template>
-  <div class="list">{{prov.name + prov.value}}</div>
+  <div class="list">{{ prov.name }}</div>
 </template>
 
 <script>

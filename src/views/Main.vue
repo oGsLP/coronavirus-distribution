@@ -1,8 +1,8 @@
 <template>
   <div class="main">
     <div class="left-part">
-      <Title :today="data.china.today" :total="data.china.total" />
-      <div ref="map" id="map" style="width: 900px;height: 600px"></div>
+      <Title id="title" :today="nation.today" :total="nation.total" />
+      <div ref="map" id="map"></div>
     </div>
     <List class="right-part" :prov="listData" />
   </div>
@@ -21,20 +21,13 @@ export default {
   },
   data() {
     return {
-      data: {
-        china: {
-          total: {},
-          today: {},
-          provinces: []
-        },
-        js: {
-          today: {},
-          total: {},
-          cities: []
-        },
-        yz: {}
+      nation: {
+        total: {},
+        today: {}
       },
+      provinces: [],
       listData: {},
+      graphData: [],
       chart: {}
     };
   },
@@ -53,35 +46,25 @@ export default {
   },
   computed: {},
   methods: {
-    fetchData() {
-      return this.$axios
-        .get("/api/g2/getOnsInfo?name=disease_h5")
-        .then(res => JSON.parse(res.data.data));
-    },
     async getData() {
-      let data = await this.fetchData();
-      this.data.china.total = data["chinaTotal"]; // confirm suspect dead heal
-      this.data.china.today = data["chinaAdd"]; // confirm suspect dead heal isUpdated
-      let china = data["areaTree"][0]["children"];
+      this.handleData(
+        await this.$axios
+          .get("/api/g2/getOnsInfo?name=disease_h5")
+          .then(res => JSON.parse(res.data.data))
+      );
+    },
+    handleData(data) {
+      this.nation.total = data["chinaTotal"]; // confirm suspect dead heal
+      this.nation.today = data["chinaAdd"]; // confirm suspect dead heal isUpdated
+      let provinces = data["areaTree"][0]["children"];
 
-      china.forEach(prov => {
-        this.data.china.provinces.push({
+      this.provinces = provinces;
+      // let that =this;
+      provinces.forEach(prov => {
+        this.graphData.push({
           name: prov["name"],
           value: prov["total"]["confirm"]
         });
-      });
-      let su = china[7];
-      this.data.js.total = su["total"];
-      this.data.js.today = su["today"];
-      su["children"].forEach(city => {
-        if (city["name"] === "扬州") {
-          this.data.yz = city;
-        } else {
-          Object.assign(city, city["total"]);
-          delete city["today"];
-          delete city["total"];
-          this.data.js.cities.push(city);
-        }
       });
     },
     initGraph() {
@@ -90,21 +73,6 @@ export default {
       this.chart.showLoading();
     },
     async drawGraph() {
-      // {
-      //     china: {
-      //         total,
-      //         today,
-      //         provinces
-      //     },
-      //     js: {
-      //         today: su_today,
-      //         total: su_total,
-      //         cities
-      //     },
-      //     yz,
-      //     su
-      // }
-
       let option = {
         tooltip: {},
         visualMap: {
@@ -149,7 +117,7 @@ export default {
             name: "确诊人数",
             type: "map",
             geoIndex: 0,
-            data: this.data.china.provinces
+            data: this.graphData
           }
         ]
       };
@@ -162,7 +130,7 @@ export default {
       this.chart.hideLoading();
     },
     getProvince(name) {
-      for (let prov of this.data.china.provinces)
+      for (let prov of this.provinces)
         if (prov.name === name) {
           return prov;
         }
@@ -173,19 +141,31 @@ export default {
 
 <style lang="stylus" scoped>
 .main
-  margin 0 1.5%
-  width 97%
+  margin 0 1%
+  width 98%
   height auto
-  min-height 650px
+  min-height 700px
   border 1px solid black
   display flex
   flex-direction row
   justify-content space-around
   .left-part,.right-part
-    margin 1%
+    margin 0.5%
     border 1px solid black
   .left-part
-    width 68%
+    width 69%
+    display flex
+    flex-direction column
+    justify-content space-around
+    #title
+      border 1px solid black
+      height 10%
+    #map
+      border 1px solid navy
+      height 88%
+      width 100%
+      min-height 300px
+      min-width 450px
   .right-part
-    width 28%
+    width 29%
 </style>

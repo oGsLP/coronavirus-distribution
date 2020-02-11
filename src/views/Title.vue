@@ -27,4 +27,10 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style lang="stylus" scoped>
+.title
+  h2
+    margin 5px
+  p
+    margin 0
+</style>
