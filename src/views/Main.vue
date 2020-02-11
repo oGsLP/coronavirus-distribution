@@ -144,21 +144,22 @@ export default {
   margin 0 1%
   width 98%
   height auto
-  min-height 700px
-  border 1px solid black
+  min-height 680px
+  max-height 700px
+  /*border 1px solid black*/
   display flex
   flex-direction row
   justify-content space-around
   .left-part,.right-part
     margin 0.5%
-    border 1px solid black
+    /*border 1px solid black*/
   .left-part
     width 69%
     display flex
     flex-direction column
     justify-content space-around
     #title
-      border 1px solid black
+      /*border 1px solid black*/
       height 10%
     #map
       border 1px solid navy

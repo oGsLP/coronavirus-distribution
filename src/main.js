@@ -13,6 +13,10 @@ Vue.prototype.$axios = axios;
 
 // import VTypewriter from "v-typewriter";
 // Vue.use(VTypewriter);
+import 'element-ui/lib/theme-chalk/index.css';
+import { Table, TableColumn } from "element-ui";
+Vue.use(Table);
+Vue.use(TableColumn);
 
 new Vue({
   router,
