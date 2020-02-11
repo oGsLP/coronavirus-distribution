@@ -33,7 +33,8 @@ export default {
       provinces: [],
       listData: {},
       graphData: [],
-      chart: {}
+      chart: {},
+      mockNanHai: { name: "南海诸岛", total: { confirm: null } }
     };
   },
   created() {
@@ -62,7 +63,7 @@ export default {
       this.nation.total = data["chinaTotal"]; // confirm suspect dead heal
       this.nation.today = data["chinaAdd"]; // confirm suspect dead heal isUpdated
       let provinces = data["areaTree"][0]["children"];
-
+      provinces.push(this.mockNanHai);
       this.provinces = provinces;
       // let that =this;
       provinces.forEach(prov => {
