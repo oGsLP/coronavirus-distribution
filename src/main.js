@@ -11,6 +11,9 @@ Vue.config.productionTip = false;
 Vue.prototype.$echarts = echarts;
 Vue.prototype.$axios = axios;
 
+// import VTypewriter from "v-typewriter";
+// Vue.use(VTypewriter);
+
 new Vue({
   router,
   store,

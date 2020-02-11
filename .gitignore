@@ -22,3 +22,4 @@ yarn-error.log*
 
 # else
 package-lock.json
+todo.txt

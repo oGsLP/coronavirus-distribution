@@ -1,0 +1,5 @@
+1. change HaiNan's name
+2. rebuild chart structure
+3. list
+4. css
+5. extension -- all provinces
