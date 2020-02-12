@@ -18,6 +18,8 @@ import "echarts/map/js/china";
 import Title from "./Title";
 import List from "./List";
 
+import getTime from "../util/getTime";
+
 export default {
   name: "Main",
   components: {
@@ -26,6 +28,7 @@ export default {
   },
   data() {
     return {
+      updateTime: getTime(),
       nation: {
         total: {},
         today: {}
@@ -60,6 +63,7 @@ export default {
       );
     },
     handleData(data) {
+      this.updateTime = data["lastUpdateTime"];
       this.nation.total = data["chinaTotal"]; // confirm suspect dead heal
       this.nation.today = data["chinaAdd"]; // confirm suspect dead heal isUpdated
       let provinces = data["areaTree"][0]["children"];
@@ -80,22 +84,42 @@ export default {
     },
     async drawGraph() {
       let option = {
+        title: {
+          text: "Latest Update",
+          subtext: `  ${this.updateTime}`,
+          left: "center",
+          top: "10%"
+        },
         tooltip: {},
+        toolbox: {
+          show: true,
+          right: "20",
+          top: "middle",
+          orient: 'vertical',
+          feature: {
+            restore: {},
+            saveAsImage: {}
+          }
+        },
         visualMap: {
           min: 0,
           max: 1500,
-          left: "left",
-          top: "bottom",
+          left: "20",
+          bottom: "20",
+          orient: 'horizontal',
           text: ["高", "低"], //取值范围的文字
           inRange: {
             color: ["#FFFAF5", "#ac0000"] //取值范围的颜色
           },
+          itemWidth: 15,
+          itemHeight: 180,
           show: true //图注
         },
         geo: {
           // 这个是重点配置区
           map: "china", // 表示中国地图
           roam: true,
+          zoom: 1.25,
           label: {
             normal: {
               show: true, // 是否显示对应地名
@@ -156,7 +180,7 @@ export default {
   flex-direction row
   justify-content space-around
   .left-part,.right-part
-    margin 0.5%
+    margin 0 0.5%
     box-shadow 0 4px 4px 0 rgba(0,0,0,0.3)
     border-radius 4px
     /*border 1px solid black*/
@@ -170,8 +194,8 @@ export default {
       height 10%
     #map
       height 88%
-      width 96%
-      margin 0 2%
+      width 99%
+      margin 0 0.5%
       min-height 300px
       min-width 450px
   .right-part

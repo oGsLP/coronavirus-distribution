@@ -11,7 +11,7 @@ module.exports={
   devServer:{
       proxy:{
         '/api':{
-          // https://view.inews.qq.com//g2/getOnsInfo?name=disease_h5
+          // https://view.inews.qq.com/g2/getOnsInfo?name=disease_h5
           target: 'https://view.inews.qq.com/',
           changeOrigin: true,
           pathRewrite:{

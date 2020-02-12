@@ -5,6 +5,7 @@
       :today="prov.today"
       :total="prov.total"
       :title="prov.name + ` 疫情统计`"
+      :style="{fontSize: `small`}"
     />
     <div class="list-table">
       <el-table
@@ -89,7 +90,7 @@ export default {
   flex-direction column
   justify-content space-between
   .list-title
-    height 10%
+    height 8.5%
     margin-top 2.5px
   .list-table
     margin 7.5px
