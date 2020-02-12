@@ -5,7 +5,7 @@
       :today="prov.today"
       :total="prov.total"
       :title="prov.name + ` 疫情统计`"
-      :style="{fontSize: `small`}"
+      :style="{ fontSize: `small` }"
     />
     <div class="list-table">
       <el-table
@@ -52,7 +52,6 @@ export default {
       let arr = [];
       if (this.prov["children"] !== undefined) {
         this.prov["children"].forEach(city => {
-          console.log(city);
           let td = { name: city["name"], kind: "↑" };
           let tt = { name: city["name"], kind: "总" };
           Object.assign(td, city["today"]);

@@ -5,19 +5,17 @@
  * @Function:
  */
 
-const path = require("path");
-
-module.exports={
-  devServer:{
-      proxy:{
-        '/api':{
-          // https://view.inews.qq.com/g2/getOnsInfo?name=disease_h5
-          target: 'https://view.inews.qq.com/',
-          changeOrigin: true,
-          pathRewrite:{
-            '^/api':''
-          }
+module.exports = {
+  devServer: {
+    proxy: {
+      "/api": {
+        // https://view.inews.qq.com/g2/getOnsInfo?name=disease_h5
+        target: "https://view.inews.qq.com/",
+        changeOrigin: true,
+        pathRewrite: {
+          "^/api": ""
         }
       }
+    }
   }
 };

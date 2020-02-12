@@ -95,7 +95,7 @@ export default {
           show: true,
           right: "20",
           top: "middle",
-          orient: 'vertical',
+          orient: "vertical",
           feature: {
             restore: {},
             saveAsImage: {}
@@ -106,7 +106,7 @@ export default {
           max: 1500,
           left: "20",
           bottom: "20",
-          orient: 'horizontal',
+          orient: "horizontal",
           text: ["高", "低"], //取值范围的文字
           inRange: {
             color: ["#FFFAF5", "#ac0000"] //取值范围的颜色
@@ -154,7 +154,7 @@ export default {
       this.chart.setOption(option);
       let that = this;
       this.chart.on("click", function(param) {
-        console.log((that.listData = that.getProvince(param.name)));
+        that.listData = that.getProvince(param.name);
         // todo
       });
       this.chart.hideLoading();
