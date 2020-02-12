@@ -6,6 +6,9 @@ import store from "./store";
 import echarts from "echarts";
 import axios from "axios";
 
+import apiConfig from "./../api.config";
+axios.defaults.baseURL = apiConfig.baseURL;
+
 Vue.config.productionTip = false;
 
 Vue.prototype.$echarts = echarts;
