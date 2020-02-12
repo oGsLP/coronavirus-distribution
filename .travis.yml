@@ -3,4 +3,4 @@ node_js:
   - v12
   - v10
   - v8
-script: npm run lint
+script: npm run build

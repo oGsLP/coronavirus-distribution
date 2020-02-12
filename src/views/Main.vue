@@ -58,7 +58,7 @@ export default {
     async getData() {
       this.handleData(
         await this.$axios
-          .get("/g2/getOnsInfo?name=disease_h5")
+          .get("/api/g2/getOnsInfo?name=disease_h5")
           .then(res => JSON.parse(res.data.data))
       );
     },

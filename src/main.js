@@ -5,10 +5,11 @@ import router from "./router";
 import echarts from "echarts";
 import axios from "axios";
 
-import apiConfig from "./../api.config";
-axios.defaults.baseURL = apiConfig.baseURL;
-
 Vue.config.productionTip = false;
+
+// import apiConfig from "./../api.config";
+// axios.defaults.baseURL = apiConfig.baseURL;
+axios.defaults.withCredentials = false;
 
 Vue.prototype.$echarts = echarts;
 Vue.prototype.$axios = axios;
