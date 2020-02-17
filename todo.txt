@@ -1,5 +1,10 @@
-1. change HaiNan's name
-2. rebuild chart structure
+1. change HaiNan's name √
+2. rebuild chart structure (split graph from chart) [× give up]
 3. list √
-4. css
+4. css (almost √) √
 5. extension -- all provinces √
+6. change graph's style √
+7. (maybe) solve across-origin api request in production mode
+
+
+ps: ↑↓ confirm/suspect/heal/dead style?
